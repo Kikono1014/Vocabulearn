@@ -1,0 +1,29 @@
+#ifndef DICTIONARY_H
+#define DICTIONARY_H
+
+#include <iostream>
+#include <fstream>
+#include "../lib/nlohmann_json/single_include/nlohmann/json.hpp"
+
+using json = nlohmann::json;
+using std::string;
+using std::vector;
+
+class Dictionary
+{
+private:
+    static json readfromJson ();
+    static void writeToJson  (json dict);
+
+public:
+    Dictionary ();
+
+    static void AddWord   (string name = "", string translation = "", vector<string> synonyms = {}, string descriptions = "");
+    static void EraseWord (int pos);
+    static void Print     ();
+    
+    ~Dictionary ();
+
+};
+
+#endif

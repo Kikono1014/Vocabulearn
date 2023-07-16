@@ -1,0 +1,29 @@
+[
+    {
+        "description": "",
+        "name": "English",
+        "score": 0,
+        "synonyms": [
+            "",
+            ""
+        ],
+        "translation": "Англійська"
+    },
+    {
+        "description": "",
+        "name": "plural",
+        "score": 0,
+        "synonyms": [
+            "",
+            ""
+        ],
+        "translation": "множина"
+    },
+    {
+        "description": "",
+        "name": "awful",
+        "score": 0,
+        "synonyms": [],
+        "translation": "жахливо"
+    }
+]

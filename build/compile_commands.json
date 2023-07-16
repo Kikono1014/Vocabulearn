@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/main.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/main.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/main.cpp"
+},
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/lib/Key/Key.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/lib/Key/Key.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/lib/Key/Key.cpp"
+},
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/Controller/Controller.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/Controller/Controller.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/Controller/Controller.cpp"
+},
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/Dictionary/Dictionary.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/Dictionary/Dictionary.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/Dictionary/Dictionary.cpp"
+},
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/Testing/Testing.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/Testing/Testing.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/Testing/Testing.cpp"
+},
+{
+  "directory": "/home/kikono/codes/C++/return/Vocabulearn/build",
+  "command": "/usr/bin/clang++ -I/home/kikono/codes/C++/return/Vocabulearn/lib/nlohmann_json/include -g -o CMakeFiles/Vocabulearn.dir/Evaluation/Evaluation.cpp.o -c /home/kikono/codes/C++/return/Vocabulearn/Evaluation/Evaluation.cpp",
+  "file": "/home/kikono/codes/C++/return/Vocabulearn/Evaluation/Evaluation.cpp"
+}
+]

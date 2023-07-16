@@ -1,0 +1,44 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include "../Dictionary/Dictionary.h"
+#include "../lib/Key/Key.h"
+
+using std::string;
+using std::vector;
+using std::map;
+
+
+
+
+class Controller
+{
+private:
+    string currentSpace { "main" };
+
+    map<string, void (Controller::*)(vector<string> args)> commands {};
+
+    void help  (vector<string> args);
+    void clear (vector<string> args);
+    void print (vector<string> args);
+    void add   (vector<string> args);
+    void erase (vector<string> args);
+
+
+    vector<string> splitArguments(string strArgs);
+    
+public:
+    Controller ();
+
+    void processCommand ();
+    vector<string> getCommandsList ();
+
+    ~Controller ();
+
+};
+
+#endif
