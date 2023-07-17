@@ -12,11 +12,12 @@ using std::vector;
 class Dictionary
 {
 private:
-    static json readfromJson ();
+    static json readFromJson ();
     static void writeToJson  (json dict);
 
 public:
     Dictionary ();
+    static void TryParseJson ();
 
     static void AddWord   (string name = "", string translation = "", vector<string> synonyms = {}, string descriptions = "");
     static void EraseWord (int pos);

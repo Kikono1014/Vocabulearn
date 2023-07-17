@@ -4,25 +4,26 @@ Dictionary::Dictionary ()
     
 }
 
-json Dictionary::readfromJson ()
+void Dictionary::TryParseJson ()
 {
-    std::ifstream f("../dictionary.json");
-    json dict { };
     try
     {
-        dict = json::parse(f) ;
+        std::ifstream f("../dictionary.json");
+        json dict { json::parse(f) };
     }
     catch (json::parse_error& ex)
     {
         if (ex.byte == 1) {
-            json t { json::parse(R"([])") };
-            writeToJson(t);
             std::ifstream f("../dictionary.json");
-            dict = json::parse(f) ;
+            writeToJson(json::parse(R"([])"));
         }
     }
-    
-    return dict;
+}
+
+json Dictionary::readFromJson ()
+{
+    std::ifstream f("../dictionary.json");
+    return json::parse(f);
 }
 
 void Dictionary::writeToJson (json dict)
@@ -47,7 +48,7 @@ void Dictionary::AddWord (string name, string translation, vector<string> synony
 
 void Dictionary::EraseWord (int pos)
 {
-    json dict { readfromJson() };
+    json dict { readFromJson() };
     dict.erase(pos);
     writeToJson(dict);
     
@@ -55,7 +56,7 @@ void Dictionary::EraseWord (int pos)
 
 void Dictionary::Print ()
 {
-    json dict { readfromJson() };
+    json dict { readFromJson() };
     int p { 1 };
     for (auto& i : dict) {
         std::cout << p << ":" << std::endl;

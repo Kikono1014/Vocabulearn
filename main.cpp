@@ -9,6 +9,7 @@ Controller ctrl {};
 
 int main ()
 {
+    Dictionary::TryParseJson();
     while (1) {
         ctrl.processCommand();
     }
