@@ -17,6 +17,7 @@ json Dictionary::readfromJson ()
         if (ex.byte == 1) {
             json t { json::parse(R"([])") };
             writeToJson(t);
+            std::ifstream f("../dictionary.json");
             dict = json::parse(f) ;
         }
     }
