@@ -1,5 +1,0 @@
-/home/kikono/codes/C++/return/Vocabulearn/build/CMakeFiles/Vocabulearn.dir
-/home/kikono/codes/C++/return/Vocabulearn/build/CMakeFiles/edit_cache.dir
-/home/kikono/codes/C++/return/Vocabulearn/build/CMakeFiles/rebuild_cache.dir
-/home/kikono/codes/C++/return/Vocabulearn/build/lib/nlohmann_json/CMakeFiles/edit_cache.dir
-/home/kikono/codes/C++/return/Vocabulearn/build/lib/nlohmann_json/CMakeFiles/rebuild_cache.dir
