@@ -6,7 +6,6 @@
 #include "Testing/Testing.h"
 
 Controller ctrl {};
-Dictionary dict {};
 
 int main ()
 {
