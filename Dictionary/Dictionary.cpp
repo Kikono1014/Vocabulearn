@@ -7,7 +7,20 @@ Dictionary::Dictionary ()
 json Dictionary::readfromJson ()
 {
     std::ifstream f("../dictionary.json");
-    json dict { json::parse(f) };
+    json dict { };
+    try
+    {
+        dict = json::parse(f) ;
+    }
+    catch (json::parse_error& ex)
+    {
+        if (ex.byte == 1) {
+            json t { json::parse(R"([])") };
+            writeToJson(t);
+            dict = json::parse(f) ;
+        }
+    }
+    
     return dict;
 }
 
