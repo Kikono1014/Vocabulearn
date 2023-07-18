@@ -13,15 +13,15 @@ using std::vector;
 using std::map;
 
 
-
-
 class Controller
 {
 private:
     string currentSpace { "main" };
 
+    // hash table of pointer to command functions
     map<string, void (Controller::*)(vector<string> args)> commands {};
 
+    // program commands
     void help  (vector<string> args);
     void clear (vector<string> args);
     void print (vector<string> args);

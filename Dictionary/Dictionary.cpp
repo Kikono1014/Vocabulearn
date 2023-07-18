@@ -11,7 +11,7 @@ void Dictionary::TryParseJson ()
         std::ifstream f("../dictionary.json");
         json dict { json::parse(f) };
     }
-    catch (json::parse_error& ex)
+    catch (json::parse_error& ex) // create a json template
     {
         if (ex.byte == 1) {
             std::ifstream f("../dictionary.json");
@@ -34,7 +34,7 @@ void Dictionary::writeToJson (json dict)
 void Dictionary::AddWord (string name, string translation, vector<string> synonyms, string descriptions)
 {
     std::ifstream f("../dictionary.json");
-    json dict { json::parse(f) };
+    json dict { json::parse(f) }; 
     json word {
         {"name", name},
         {"translation", translation},
