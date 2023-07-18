@@ -1,6 +1,6 @@
 #include "Controller.h"
 
-
+// add methods to command table
 Controller::Controller ()
 {
     commands["clear"] =  &Controller::clear;
@@ -13,18 +13,23 @@ Controller::Controller ()
 
 void Controller::processCommand ()
 {
+    // get input from user
     string command { Key::GetString() };
     
     if (command != "") {
         string key { command };
         vector<string> args { "" };
 
+        // if space exist
         if (command.find(" ") != string::npos) {
+            // use first word like a key to command and other split to arguments array
             key  = command.substr(0, command.find(" "));
             string strArgs { command.substr(command.find(" ")+1, command.length() - key.length()) };
             args = splitArguments(strArgs);
         }
 
+        // TODO separate command execution
+        // run command if it exist
         if (commands.find(key) != commands.end()) {
             (this->*commands[key])(args);
         } else {
@@ -50,6 +55,7 @@ vector<string> Controller::splitArguments(string strArgs)
     return args;
 }
 
+// give a list of commands name
 vector<string> Controller::getCommandsList ()
 {
     vector<string> commandsList {};
@@ -67,7 +73,7 @@ void Controller::help (vector<string> args)
         std::cout << "help   -  Write this text" << std::endl;
         std::cout << "clear  -  Clear your terminal" << std::endl;
         std::cout << "print  -  Print whole dictionary" << std::endl;
-        std::cout << "add    -  Add word to doctionary(For more information: \"help add\")" << std::endl;
+        std::cout << "add    -  Add word to dictionary(For more information: \"help add\")" << std::endl;
     }
     
     if (args[0] == "add") {
@@ -76,6 +82,7 @@ void Controller::help (vector<string> args)
 
 }
 
+// clear terminal
 void Controller::clear (vector<string> args)
 {
     #if defined _WIN32
@@ -87,6 +94,7 @@ void Controller::clear (vector<string> args)
     #endif
 }
 
+// show whole dictionary
 void Controller::print (vector<string> args)
 {
     Dictionary::Print();
