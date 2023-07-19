@@ -27,14 +27,16 @@ void Controller::processCommand ()
             string strArgs { command.substr(command.find(" ")+1, command.length() - key.length()) };
             args = splitArguments(strArgs);
         }
+        runCommands(key, args);
+    }
+}
 
-        // TODO separate command execution
-        // run command if it exist
-        if (commands.find(key) != commands.end()) {
-            (this->*commands[key])(args);
-        } else {
-            std::cout << "Command " << key << " not found. Please, check spelling or write \"help\"." << std::endl;
-        }
+void Controller::runCommands (string key, vector<string> args) 
+{
+    if (commands.find(key) != commands.end()) {
+        (this->*commands[key])(args);
+    } else {
+        std::cout << "Command " << key << " not found. Please, check spelling or write \"help\"." << std::endl;
     }
 }
 
