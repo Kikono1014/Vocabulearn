@@ -8,6 +8,7 @@ Controller::Controller ()
     commands["add"]   =  &Controller::add;
     commands["print"] =  &Controller::print;
     commands["erase"] =  &Controller::erase;
+    commands["empty"] =  &Controller::empty;
 }
 
 
@@ -112,6 +113,11 @@ void Controller::add (vector<string> args)
 void Controller::erase (vector<string> args)
 {
     Dictionary::EraseWord(std::stoi(args[0])-1);
+}
+
+void Controller::empty (vector<string> args)
+{
+    Dictionary::Empty();
 }
 
 Controller::~Controller ()
