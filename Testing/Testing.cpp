@@ -55,7 +55,19 @@ map<int, bool> Testing::doTest (json dict, vector<int> test, int type)
 
     if (type == WordTranslation) {
         for (int i : test) {
-            std::cout << i << std::endl;
+            std::cout << dict[i]["name"] << std::endl;
+            string answer { "" };
+            std::cin >> answer;
+            
+            if (answer == dict[i]["translation"]) {
+                // TODO increase proportionally
+                dict[i]["score"] = (int)dict[i]["score"] + 10;
+                results[i] = true;
+            } else {
+                // TODO decrease proportionally
+                dict[i]["score"] = (int)dict[i]["score"] - 10;
+                results[i] = false;
+            }            
         }
     }
     
