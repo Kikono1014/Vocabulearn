@@ -8,6 +8,7 @@ Controller::Controller ()
     commands["add"]   =  &Controller::add;
     commands["print"] =  &Controller::print;
     commands["erase"] =  &Controller::erase;
+    commands["empty"] =  &Controller::empty;
 }
 
 
@@ -29,6 +30,17 @@ void Controller::processCommand ()
         }
         runCommands(key, args);
     }
+}
+
+// give a list of commands name
+vector<string> Controller::getCommandsList ()
+{
+    vector<string> commandsList {};
+
+    for (auto key : commands) {
+        commandsList.push_back(key.first);
+    }
+    return commandsList;
 }
 
 void Controller::runCommands (string key, vector<string> args) 
@@ -55,17 +67,6 @@ vector<string> Controller::splitArguments(string strArgs)
         }
     }
     return args;
-}
-
-// give a list of commands name
-vector<string> Controller::getCommandsList ()
-{
-    vector<string> commandsList {};
-
-    for (auto key : commands) {
-        commandsList.push_back(key.first);
-    }
-    return commandsList;
 }
 
 
@@ -112,6 +113,11 @@ void Controller::add (vector<string> args)
 void Controller::erase (vector<string> args)
 {
     Dictionary::EraseWord(std::stoi(args[0])-1);
+}
+
+void Controller::empty (vector<string> args)
+{
+    Dictionary::Empty();
 }
 
 Controller::~Controller ()

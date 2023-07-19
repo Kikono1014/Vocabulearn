@@ -68,6 +68,11 @@ void Dictionary::Print ()
     }
 }
 
+void Dictionary::Empty ()
+{
+    writeToJson(json::parse(R"([])"));
+}
+
 Dictionary::~Dictionary ()
 {
     
