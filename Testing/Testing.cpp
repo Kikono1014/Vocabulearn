@@ -28,8 +28,7 @@ Testing::Testing()
 void Testing::runTest (json dict, int type, int difficult)
 {
     vector<int> test { createTest(dict, difficult) };
-    map<int, bool> results { doTest(dict, test, type) };
-    showResults(dict, results);
+    doTest(dict, test, type);
 }
 
 vector<int> Testing::createTest (json dict, int difficult)
@@ -49,34 +48,48 @@ vector<int> Testing::createTest (json dict, int difficult)
     return test;
 }
 
-map<int, bool> Testing::doTest (json dict, vector<int> test, int type)
+void Testing::doTest (json dict, vector<int> test, int type)
 {
-    map<int, bool> results { };
-
+    std::cout << "Test started." << std::endl;
     if (type == WordTranslation) {
         for (int i : test) {
             std::cout << dict[i]["name"] << std::endl;
             string answer { "" };
             std::cin >> answer;
-            
-            if (answer == dict[i]["translation"]) {
-                // TODO increase proportionally
-                dict[i]["score"] = (int)dict[i]["score"] + 10;
-                results[i] = true;
-            } else {
-                // TODO decrease proportionally
-                dict[i]["score"] = (int)dict[i]["score"] - 10;
-                results[i] = false;
-            }            
+            proccessAnswer(dict[i], answer, type);
         }
     }
-    
-    return results;
+    if (type == TranslationWord) {
+        for (int i : test) {
+            std::cout << dict[i]["translation"] << std::endl;
+            string answer { "" };
+            std::cin >> answer;
+            proccessAnswer(dict[i], answer, type);
+        }
+    }
+    std::cout << "Test ended." << std::endl;
 }
 
-void Testing::showResults (json dict, map<int, bool> results)
+void Testing::proccessAnswer (json word, string answer, int type)
 {
-    
+    bool result { 0 };
+    string correct { "" };
+
+    if (type == WordTranslation) {
+        result = answer == word["translation"];
+        correct = word["name"];
+    }
+    if (type == TranslationWord) {
+        result = answer == word["name"];
+        correct = word["translation"];
+    }
+
+
+    if (result) {
+        std::cout << "Correct" << std::endl;
+    } else {
+        std::cout << "Incorrect. Correct word is " << correct << std::endl;
+    }
 }
 
 

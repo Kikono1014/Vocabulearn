@@ -31,9 +31,9 @@ int uniqueRandom (int min, int max, vector<int> array);
 class Testing
 {
 private:
-    static vector<int>    createTest  (json dict, int difficult);
-    static map<int, bool> doTest      (json dict, vector<int> test, int type);
-    static void           showResults (json dict, map<int, bool> results);
+    static vector<int> createTest     (json dict, int difficult);
+    static void        doTest         (json dict, vector<int> test, int type);
+    static void        proccessAnswer (json word, string answer, int type);
 
 public:
     Testing();
