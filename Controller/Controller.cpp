@@ -31,6 +31,17 @@ void Controller::processCommand ()
     }
 }
 
+// give a list of commands name
+vector<string> Controller::getCommandsList ()
+{
+    vector<string> commandsList {};
+
+    for (auto key : commands) {
+        commandsList.push_back(key.first);
+    }
+    return commandsList;
+}
+
 void Controller::runCommands (string key, vector<string> args) 
 {
     if (commands.find(key) != commands.end()) {
@@ -55,17 +66,6 @@ vector<string> Controller::splitArguments(string strArgs)
         }
     }
     return args;
-}
-
-// give a list of commands name
-vector<string> Controller::getCommandsList ()
-{
-    vector<string> commandsList {};
-
-    for (auto key : commands) {
-        commandsList.push_back(key.first);
-    }
-    return commandsList;
 }
 
 
