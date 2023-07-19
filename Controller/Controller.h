@@ -29,6 +29,7 @@ private:
     void add   (vector<string> args);
     void erase (vector<string> args);
     void test  (vector<string> args);
+    void empty (vector<string> args);
 
     void           runCommands   (string key, vector<string> args);
     vector<string> splitArguments(string strArgs);

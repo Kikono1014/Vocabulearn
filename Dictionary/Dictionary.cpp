@@ -74,6 +74,11 @@ json Dictionary::GetDictionary ()
     return readFromJson();
 }
 
+void Dictionary::Empty ()
+{
+    writeToJson(json::parse(R"([])"));
+}
+
 Dictionary::~Dictionary ()
 {
     

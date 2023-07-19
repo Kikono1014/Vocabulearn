@@ -9,6 +9,7 @@ Controller::Controller ()
     commands["print"] =  &Controller::print;
     commands["erase"] =  &Controller::erase;
     commands["test"]  =  &Controller::test;
+    commands["empty"] =  &Controller::empty;
 }
 
 
@@ -132,6 +133,11 @@ void Controller::test (vector<string> args)
     if (args[0] == "tw") {
         Testing::runTest(Dictionary::GetDictionary(), TranslationWord, Easy); 
     }
+}
+
+void Controller::empty (vector<string> args)
+{
+    Dictionary::Empty();
 }
 
 Controller::~Controller ()

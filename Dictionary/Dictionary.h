@@ -18,11 +18,12 @@ private:
 public:
     Dictionary ();
     static void TryParseJson ();
-    
-    static void AddWord       (string name = "", string translation = "", vector<string> synonyms = {}, string descriptions = "");
-    static void EraseWord     (int pos);
-    static void Print         ();
+  
+    static void AddWord   (string name = "", string translation = "", vector<string> synonyms = {}, string descriptions = "");
+    static void EraseWord (int pos);
+    static void Print     ();
     static json GetDictionary ();
+    static void Empty     ();
     
     ~Dictionary ();
 
