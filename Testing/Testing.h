@@ -16,9 +16,9 @@ using std::map;
 class Testing
 {
 private:
-    static vector<int> createTest  (json dict, int type);
-    static void        doTest      (json dict, vector<int> test);
-    static void        showResults (json dict, map<int, bool> results);
+    static vector<int>    createTest  (json dict, int type);
+    static map<int, bool> doTest      (json dict, vector<int> test);
+    static void           showResults (json dict, map<int, bool> results);
 
 public:
     Testing();
