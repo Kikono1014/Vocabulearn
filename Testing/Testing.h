@@ -20,17 +20,23 @@ enum TestTypes {
     TranslationWord
 };
 
+enum TestDifficulties {
+    Easy,
+    Notmal,
+    Hard
+};
+
 class Testing
 {
 private:
-    static vector<int>    createTest  (json dict, int type);
-    static map<int, bool> doTest      (json dict, vector<int> test);
+    static vector<int>    createTest  (json dict, int difficult);
+    static map<int, bool> doTest      (json dict, vector<int> test, int type);
     static void           showResults (json dict, map<int, bool> results);
 
 public:
     Testing();
 
-    static void runTest (json dict, int type);
+    static void runTest (json dict, int type, int difficult);
 
     ~Testing();
 

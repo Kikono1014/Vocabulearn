@@ -12,14 +12,14 @@ Testing::Testing()
 
 }
 
-void Testing::runTest (json dict, int type)
+void Testing::runTest (json dict, int type, int difficult)
 {
-    vector<int> test { createTest(dict, type) };
-    map<int, bool> results { doTest(dict, test) };
+    vector<int> test { createTest(dict, difficult) };
+    map<int, bool> results { doTest(dict, test, type) };
     showResults(dict, results);
 }
 
-vector<int> Testing::createTest (json dict, int type)
+vector<int> Testing::createTest (json dict, int difficult)
 {
     vector<int> test { };
     // TODO difficult choosing by user
@@ -31,7 +31,7 @@ vector<int> Testing::createTest (json dict, int type)
     return test;
 }
 
-map<int, bool> Testing::doTest (json dict, vector<int> test)
+map<int, bool> Testing::doTest (json dict, vector<int> test, int type)
 {
     map<int, bool> results { };
     

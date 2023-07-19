@@ -127,10 +127,10 @@ void Controller::erase (vector<string> args)
 void Controller::test (vector<string> args)
 {
     if (args[0] == "wt") {
-        Testing::runTest(Dictionary::GetDictionary(), WordTranslation);
+        Testing::runTest(Dictionary::GetDictionary(), WordTranslation, Easy);
     }
     if (args[0] == "tw") {
-        Testing::runTest(Dictionary::GetDictionary(), TranslationWord);
+        Testing::runTest(Dictionary::GetDictionary(), TranslationWord, Easy); 
     }
 }
 
