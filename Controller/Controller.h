@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "../Testing/Testing.h"
 #include "../Dictionary/Dictionary.h"
 #include "../lib/Key/Key.h"
 
@@ -27,6 +28,7 @@ private:
     void print (vector<string> args);
     void add   (vector<string> args);
     void erase (vector<string> args);
+    void test  (vector<string> args);
     void empty (vector<string> args);
 
     void           runCommands   (string key, vector<string> args);

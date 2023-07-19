@@ -8,6 +8,7 @@ Controller::Controller ()
     commands["add"]   =  &Controller::add;
     commands["print"] =  &Controller::print;
     commands["erase"] =  &Controller::erase;
+    commands["test"]  =  &Controller::test;
     commands["empty"] =  &Controller::empty;
 }
 
@@ -76,11 +77,20 @@ void Controller::help (vector<string> args)
         std::cout << "help   -  Write this text" << std::endl;
         std::cout << "clear  -  Clear your terminal" << std::endl;
         std::cout << "print  -  Print whole dictionary" << std::endl;
-        std::cout << "add    -  Add word to dictionary(For more information: \"help add\")" << std::endl;
+        std::cout << "add    -  Add word to dictionary (For more information: \"help add\")" << std::endl;
+        std::cout << "test   -  Testing your knowledge (For more information: \"help test\")" << std::endl;
     }
     
     if (args[0] == "add") {
         std::cout << "add <word> <translate> - to simply add word and translation" << std::endl;
+    }
+
+
+    if (args[0] == "test") {
+        std::cout << "test <type> - to start test" << std::endl;
+        std::cout << "types:" << std::endl;
+        std::cout << "wt - shows you the word, and you then write the translation" << std::endl;
+        std::cout << "tw - shows you the translation, and you then write the word" << std::endl;
     }
 
 }
@@ -113,6 +123,16 @@ void Controller::add (vector<string> args)
 void Controller::erase (vector<string> args)
 {
     Dictionary::EraseWord(std::stoi(args[0])-1);
+}
+
+void Controller::test (vector<string> args)
+{
+    if (args[0] == "wt") {
+        Testing::runTest(Dictionary::GetDictionary(), WordTranslation, Easy);
+    }
+    if (args[0] == "tw") {
+        Testing::runTest(Dictionary::GetDictionary(), TranslationWord, Easy); 
+    }
 }
 
 void Controller::empty (vector<string> args)
