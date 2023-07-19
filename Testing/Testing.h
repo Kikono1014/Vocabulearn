@@ -22,9 +22,12 @@ enum TestTypes {
 
 enum TestDifficulties {
     Easy,
-    Notmal,
+    Normal,
     Hard
 };
+
+int random (int min, int max);
+int uniqueRandom (int min, int max, vector<int> array);
 
 class Testing
 {
