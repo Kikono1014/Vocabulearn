@@ -76,12 +76,12 @@ void Testing::proccessAnswer (json word, string answer, int type)
     string correct { "" };
 
     if (type == WordTranslation) {
-        result = answer == word["translation"];
-        correct = word["name"];
+        correct = word["translation"];
+        result = answer == correct;
     }
     if (type == TranslationWord) {
-        result = answer == word["name"];
-        correct = word["translation"];
+        correct = word["name"];
+        result = answer == correct;
     }
 
 
