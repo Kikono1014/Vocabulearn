@@ -68,6 +68,12 @@ void Dictionary::Print ()
     }
 }
 
+
+json Dictionary::GetDictionary ()
+{
+    return readFromJson();
+}
+
 Dictionary::~Dictionary ()
 {
     

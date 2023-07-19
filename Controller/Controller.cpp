@@ -8,6 +8,7 @@ Controller::Controller ()
     commands["add"]   =  &Controller::add;
     commands["print"] =  &Controller::print;
     commands["erase"] =  &Controller::erase;
+    commands["test"]  =  &Controller::test;
 }
 
 
@@ -112,6 +113,16 @@ void Controller::add (vector<string> args)
 void Controller::erase (vector<string> args)
 {
     Dictionary::EraseWord(std::stoi(args[0])-1);
+}
+
+void Controller::test (vector<string> args)
+{
+    if (args[0] == "wt") {
+        Testing::runTest(Dictionary::GetDictionary(), WordTranslation);
+    }
+    if (args[0] == "tw") {
+        Testing::runTest(Dictionary::GetDictionary(), TranslationWord);
+    }
 }
 
 Controller::~Controller ()
