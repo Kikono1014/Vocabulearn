@@ -2,12 +2,15 @@
 #define TESTING_H
 
 #include <iostream>
+#include <random>
 #include <string>
 #include <vector>
 #include <map>
 #include "../Dictionary/Dictionary.h"
 #include "../lib/Key/Key.h"
+#include "../lib/nlohmann_json/single_include/nlohmann/json.hpp"
 
+using json = nlohmann::json;
 using std::string;
 using std::vector;
 using std::map;

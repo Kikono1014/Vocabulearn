@@ -58,11 +58,11 @@ void Dictionary::Print ()
 {
     json dict { readFromJson() };
     int p { 1 };
-    for (auto& i : dict) {
+    for (auto& word : dict) {
         std::cout << p << ":" << std::endl;
-        std::cout << "    " << i["name"]        << std::endl;
-        std::cout << "    " << i["translation"] << std::endl;
-        std::cout << "    " << i["description"] << std::endl;
+        std::cout << "    " << word["name"]        << std::endl;
+        std::cout << "    " << word["translation"] << std::endl;
+        std::cout << "    " << word["description"] << std::endl;
 
         p++;
     }
