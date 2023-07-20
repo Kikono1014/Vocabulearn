@@ -16,7 +16,7 @@ Controller::Controller ()
 void Controller::processCommand ()
 {
     // get input from user
-    string command { Key::GetString() };
+    string command { Key::GetAsyncString() };
     
     if (command != "") {
         string key { command };
