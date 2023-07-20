@@ -8,6 +8,7 @@
 #include <map>
 #include "../Dictionary/Dictionary.h"
 #include "../lib/nlohmann_json/single_include/nlohmann/json.hpp"
+#include "../lib/Key/Key.h"
 
 using json = nlohmann::json;
 using std::string;

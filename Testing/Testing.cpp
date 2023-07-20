@@ -48,23 +48,24 @@ vector<int> Testing::createTest (json dict, int difficult)
     return test;
 }
 
+string getAnswer()
+{
+    return Key::GetString();
+}
+
 void Testing::doTest (json dict, vector<int> test, int type)
 {
     std::cout << "Test started." << std::endl;
     if (type == WordTranslation) {
         for (int i : test) {
             std::cout << dict[i]["name"] << std::endl;
-            string answer { "" };
-            std::cin >> answer;
-            proccessAnswer(dict[i], answer, type);
+            proccessAnswer(dict[i], getAnswer(), type);
         }
     }
     if (type == TranslationWord) {
         for (int i : test) {
             std::cout << dict[i]["translation"] << std::endl;
-            string answer { "" };
-            std::cin >> answer;
-            proccessAnswer(dict[i], answer, type);
+            proccessAnswer(dict[i], getAnswer(), type);
         }
     }
     std::cout << "Test ended." << std::endl;
