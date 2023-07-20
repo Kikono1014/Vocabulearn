@@ -6,6 +6,8 @@
 #include <unistd.h>
 
 #include "Key.h"
+#include "KeyPlus.h"
+
 int Key::_keyInterrupt() {
     static const int STDIN = 0;
     static bool initialized = false;
@@ -76,7 +78,16 @@ std::string Key::GetString() {
     if (_keyInterrupt()) {
         while (1) {
             std::string newChar = GetChar();
-            if (newChar == "\n") break; else line += newChar;
+            if (newChar == "\n")  {
+                break; 
+            } else {
+                std::string bs { (char)BACKSPACE };
+                if (newChar == bs)  {
+                    line.pop_back();
+                } else {
+                    line += newChar;
+                }
+            }
         }
     }
     return line;
