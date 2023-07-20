@@ -74,11 +74,12 @@ vector<string> Controller::splitArguments(string strArgs)
 void Controller::help (vector<string> args)
 {
     if (args[0] == "") {
-        std::cout << "help   -  Write this text" << std::endl;
-        std::cout << "clear  -  Clear your terminal" << std::endl;
-        std::cout << "print  -  Print whole dictionary" << std::endl;
-        std::cout << "add    -  Add word to dictionary (For more information: \"help add\")" << std::endl;
-        std::cout << "test   -  Testing your knowledge (For more information: \"help test\")" << std::endl;
+        std::cout << "help  -  Write this text" << std::endl;
+        std::cout << "clear -  Clear your terminal" << std::endl;
+        std::cout << "print -  Print whole dictionary" << std::endl;
+        std::cout << "add   -  Add word to dictionary (For more information: \"help add\")" << std::endl;
+        std::cout << "test  -  Testing your knowledge (For more information: \"help test\")" << std::endl;
+        std::cout << "empty -  Emptying your dictionary" << std::endl;
     }
     
     if (args[0] == "add") {
@@ -87,10 +88,18 @@ void Controller::help (vector<string> args)
 
 
     if (args[0] == "test") {
-        std::cout << "test <type> - to start test" << std::endl;
+        std::cout << "test <type>              - to start test" << std::endl;
+        std::cout << "test <type> <difficulty> - to start test with specific difficulty" << std::endl;
+
         std::cout << "types:" << std::endl;
         std::cout << "wt - shows you the word, and you then write the translation" << std::endl;
         std::cout << "tw - shows you the translation, and you then write the word" << std::endl;
+
+        std::cout << "difficulty:" << std::endl;
+        std::cout << "1 - easy       - 30\% of words" << std::endl;
+        std::cout << "2 - normal     - 50\% of words" << std::endl;
+        std::cout << "3 - hard       - 80\% of words" << std::endl;
+        std::cout << "4 - impossible - 100\% of words" << std::endl;
     }
 
 }
@@ -127,11 +136,30 @@ void Controller::erase (vector<string> args)
 
 void Controller::test (vector<string> args)
 {
+    int difficulty { Normal };
+    
+    if (args.size() == 2) {
+        if (args[1] == "easy") {
+            difficulty = Easy;
+        }
+        if (args[1] == "normal") {
+            difficulty = Normal;
+        }
+        if (args[1] == "hard") {
+            difficulty = Hard;
+        }
+        if (args[1] == "impossible") {
+            difficulty = Impossible;
+        } else {
+            difficulty = std::stoi(args[1])-1;
+        }
+    }
+
     if (args[0] == "wt") {
-        Testing::runTest(Dictionary::GetDictionary(), WordTranslation, Easy);
+        Testing::runTest(Dictionary::GetDictionary(), WordTranslation, difficulty);
     }
     if (args[0] == "tw") {
-        Testing::runTest(Dictionary::GetDictionary(), TranslationWord, Easy); 
+        Testing::runTest(Dictionary::GetDictionary(), TranslationWord, difficulty); 
     }
 }
 
