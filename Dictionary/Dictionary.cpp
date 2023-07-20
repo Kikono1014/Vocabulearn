@@ -79,6 +79,28 @@ void Dictionary::Empty ()
     writeToJson(json::parse(R"([])"));
 }
 
+
+void Dictionary::ChangeWord (int id, string key, string value)
+{
+    json dict { readFromJson() };
+    dict[id][key] = value;
+    writeToJson(dict);
+}
+
+void Dictionary::ChangeWord (int id, string key, int synonymId, string value)
+{
+    json dict { readFromJson() };
+    dict[id][key][synonymId] = value;
+    writeToJson(dict);
+}
+
+void Dictionary::ChangeWord (int id, string key, vector<string> values)
+{
+    json dict { readFromJson() };
+    dict[id][key] = values;
+    writeToJson(dict);
+}
+
 Dictionary::~Dictionary ()
 {
     

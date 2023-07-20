@@ -1,6 +1,6 @@
 #include "Controller.h"
 
-// add methods to command table
+// add methods to command hashtable
 Controller::Controller ()
 {
     commands["clear"] =  &Controller::clear;
@@ -10,6 +10,7 @@ Controller::Controller ()
     commands["erase"] =  &Controller::erase;
     commands["test"]  =  &Controller::test;
     commands["empty"] =  &Controller::empty;
+    commands["change"] =  &Controller::change;
 }
 
 
@@ -63,6 +64,8 @@ vector<string> Controller::splitArguments(string strArgs)
             word = "";
         }
 
+        // TODO rewrite to recognize sentence in ""
+
         if (strArgs[i] != ' ') {
             word += strArgs[i];
         }
@@ -74,12 +77,13 @@ vector<string> Controller::splitArguments(string strArgs)
 void Controller::help (vector<string> args)
 {
     if (args[0] == "") {
-        std::cout << "help  -  Write this text" << std::endl;
-        std::cout << "clear -  Clear your terminal" << std::endl;
-        std::cout << "print -  Print whole dictionary" << std::endl;
-        std::cout << "add   -  Add word to dictionary (For more information: \"help add\")" << std::endl;
-        std::cout << "test  -  Testing your knowledge (For more information: \"help test\")" << std::endl;
-        std::cout << "empty -  Emptying your dictionary" << std::endl;
+        std::cout << "help   - Write this text" << std::endl;
+        std::cout << "add    - Add word to dictionary (For more information: \"help add\")" << std::endl;
+        std::cout << "clear  - Clear your terminal" << std::endl;
+        std::cout << "print  - Print whole dictionary" << std::endl;
+        std::cout << "test   - Testing your knowledge (For more information: \"help test\")" << std::endl;
+        std::cout << "empty  - Emptying your dictionary" << std::endl;
+        std::cout << "change - Changing some information in word (For more information: \"help change\")" << std::endl;
     }
     
     if (args[0] == "add") {
@@ -96,12 +100,26 @@ void Controller::help (vector<string> args)
         std::cout << "tw - shows you the translation, and you then write the word" << std::endl;
 
         std::cout << "difficulty:" << std::endl;
-        std::cout << "1 - easy       - 30\% of words" << std::endl;
-        std::cout << "2 - normal     - 50\% of words" << std::endl;
-        std::cout << "3 - hard       - 80\% of words" << std::endl;
+        std::cout << "1 - easy       - 30\% of words"  << std::endl;
+        std::cout << "2 - normal     - 50\% of words"  << std::endl;
+        std::cout << "3 - hard       - 80\% of words"  << std::endl;
         std::cout << "4 - impossible - 100\% of words" << std::endl;
     }
 
+    if (args[0] == "change") {
+        std::cout << "change <word index> <key> <value> - to change value in word" << std::endl;
+        std::cout << "Keys:"       << std::endl;
+        std::cout << "name"        << std::endl;
+        std::cout << "translation" << std::endl;
+        std::cout << "synonym"     << std::endl;
+        std::cout << "synonyms"    << std::endl;
+        std::cout << "description" << std::endl;
+
+        std::cout << "Specific keys command:" << std::endl;
+        std::cout << "change <word index> description \"<value>\" - to change description" << std::endl;
+        std::cout << "change <word index> synonym <index> <value> - to change concreted synonym" << std::endl;
+        std::cout << "change <word index> synonym <first synonym> <second synonym> ... <last synonym> - to change all synonyms" << std::endl;
+    }
 }
 
 // clear terminal
@@ -166,6 +184,25 @@ void Controller::test (vector<string> args)
 void Controller::empty (vector<string> args)
 {
     Dictionary::Empty();
+}
+
+
+void Controller::change (vector<string> args)
+{
+    int wordId = std::stoi(args[0]) - 1;
+    if (args[1] == "synonym") {
+        Dictionary::ChangeWord(wordId, args[1], std::stoi(args[2]), args[3]);
+    }
+    if (args[1] == "synonyms") {
+        vector<string> synonyms {};
+        for (string synonym : args) {
+            synonyms.push_back(synonym);
+        }
+        Dictionary::ChangeWord(wordId, args[1], synonyms);
+    }
+    if (args[1] != "synonym" or args[1] != "synonyms") {
+        Dictionary::ChangeWord(wordId, args[1], args[2]);
+    }
 }
 
 Controller::~Controller ()

@@ -23,13 +23,14 @@ private:
     map<string, void (Controller::*)(vector<string> args)> commands {};
 
     // program commands
-    void help  (vector<string> args);
-    void clear (vector<string> args);
-    void print (vector<string> args);
-    void add   (vector<string> args);
-    void erase (vector<string> args);
-    void test  (vector<string> args);
-    void empty (vector<string> args);
+    void help   (vector<string> args);
+    void clear  (vector<string> args);
+    void print  (vector<string> args);
+    void add    (vector<string> args);
+    void erase  (vector<string> args);
+    void test   (vector<string> args);
+    void empty  (vector<string> args);
+    void change (vector<string> args);
 
     void           runCommands   (string key, vector<string> args);
     vector<string> splitArguments(string strArgs);
