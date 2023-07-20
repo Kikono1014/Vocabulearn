@@ -31,12 +31,29 @@ void Testing::runTest (json dict, int type, int difficult)
     doTest(dict, test, type);
 }
 
+int createCounter (int size, int difficult) 
+{
+    int counter { 5 };
+    if (difficult == Easy) {
+        counter = (int)(size * 0.3);
+    }
+    if (difficult == Normal) {
+        counter = (int)(size * 0.5);
+    }
+    if (difficult == Hard) {
+        counter = (int)(size * 0.8);
+    }
+    if (difficult == Impossible) {
+        counter = size;
+    }
+    return counter;
+}
+
 vector<int> Testing::createTest (json dict, int difficult)
 {
     vector<int> test { };
-    // TODO difficult choosing by user
-    int counter { 5 }; // placeholder
     int size { (int)dict.size() };
+    int counter { createCounter(size, difficult) };
 
     if (size >= counter) {
         for (int i = 0; i < counter; ++i) {
@@ -48,7 +65,7 @@ vector<int> Testing::createTest (json dict, int difficult)
     return test;
 }
 
-string getAnswer()
+string getAnswer ()
 {
     return Key::GetString();
 }
@@ -73,7 +90,7 @@ void Testing::doTest (json dict, vector<int> test, int type)
 
 void Testing::proccessAnswer (json word, string answer, int type)
 {
-    bool result { 0 };
+    bool result { false };
     string correct { "" };
 
     if (type == WordTranslation) {
@@ -84,7 +101,6 @@ void Testing::proccessAnswer (json word, string answer, int type)
         correct = word["name"];
         result = answer == correct;
     }
-
 
     if (result) {
         std::cout << "Correct" << std::endl;

@@ -23,7 +23,8 @@ enum TestTypes {
 enum TestDifficulties {
     Easy,
     Normal,
-    Hard
+    Hard,
+    Impossible
 };
 
 int random (int min, int max);
