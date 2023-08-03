@@ -31,10 +31,12 @@ void Dictionary::writeToJson (json dict)
     std::ofstream o("../dictionary.json");
     o << std::setw(4) << dict;
 }
+
 void Dictionary::AddWord (string name, string translation, vector<string> synonyms, string descriptions)
 {
-    std::ifstream f("../dictionary.json");
-    json dict { json::parse(f) }; 
+    json dict { readFromJson() }; 
+    dict = dict[0];
+
     json word {
         {"name", name},
         {"translation", translation},
@@ -42,13 +44,16 @@ void Dictionary::AddWord (string name, string translation, vector<string> synony
         {"synonyms", synonyms},
         {"description", descriptions}
     };
+    
     dict.push_back(word);
+    
     writeToJson(dict);
 }
 
 void Dictionary::EraseWord (int pos)
 {
     json dict { readFromJson() };
+    dict = dict[0];
     dict.erase(pos);
     writeToJson(dict);
     
@@ -58,7 +63,7 @@ void Dictionary::Print ()
 {
     json dict { readFromJson() };
     int p { 1 };
-    for (auto& word : dict) {
+    for (auto& word : dict[0]) {
         std::cout << p << ":" << std::endl;
         std::cout << "    " << word["name"]        << std::endl;
         std::cout << "    " << word["translation"] << std::endl;
@@ -83,6 +88,7 @@ void Dictionary::Empty ()
 void Dictionary::ChangeWord (int id, string key, string value)
 {
     json dict { readFromJson() };
+    dict = dict[0];
     dict[id][key] = value;
     writeToJson(dict);
 }
@@ -90,6 +96,7 @@ void Dictionary::ChangeWord (int id, string key, string value)
 void Dictionary::ChangeWord (int id, string key, int synonymId, string value)
 {
     json dict { readFromJson() };
+    dict = dict[0];
     dict[id][key][synonymId] = value;
     writeToJson(dict);
 }
@@ -97,6 +104,7 @@ void Dictionary::ChangeWord (int id, string key, int synonymId, string value)
 void Dictionary::ChangeWord (int id, string key, vector<string> values)
 {
     json dict { readFromJson() };
+    dict = dict[0];
     dict[id][key] = values;
     writeToJson(dict);
 }
