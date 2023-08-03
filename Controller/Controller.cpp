@@ -57,19 +57,34 @@ void Controller::runCommands (string key, vector<string> args)
 vector<string> Controller::splitArguments(string strArgs)
 {
     vector<string> args {};
-    string word { "" };
+    string line { "" };
+    bool inQuotes { 0 };
+    
     for (int i = 0; i <= strArgs.length(); ++i) {
-        if (strArgs[i] == ' ' or strArgs[i] == strArgs[strArgs.length()]) {
-            args.push_back(word);
-            word = "";
+        char ch { strArgs[i] };
+
+        if (ch == '"') {
+            inQuotes = !inQuotes;
         }
 
-        // TODO rewrite to recognize sentence in ""
-
-        if (strArgs[i] != ' ') {
-            word += strArgs[i];
+        if (inQuotes) {
+            if (ch != '"') {
+                line += ch;
+            } 
+        } else {
+            if (ch == ' ' or ch == '"' or ch == strArgs[strArgs.length()]) {
+                if (line != "") {
+                    args.push_back(line);
+                    line = "";
+                }
+            }
+        
+            if (ch != ' ' and ch != '"') {
+                line += ch;
+            }
         }
     }
+
     return args;
 }
 
