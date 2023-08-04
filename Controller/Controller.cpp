@@ -103,7 +103,11 @@ void Controller::help (vector<string> args)
     }
     
     if (args[0] == "add") {
-        std::cout << "add <word> <translate> - to simply add word and translation" << std::endl;
+        std::cout << "add <word> <translate> - simply add word with translation" << std::endl;
+        std::cout << "add <word> <translate> <\"description\">"
+            << " - add word with translation and description" << std::endl;
+        std::cout << "add <word> <translate> <\"description\"> <first synonym> <second synonym> ... <last synonym>"
+            << "\n - add word with translation, description and synonyms" << std::endl;
     }
 
     if (args[0] == "print") {
@@ -174,10 +178,20 @@ void Controller::add (vector<string> args)
         std::cout << "Please, check spelling or write \"help add\"." << std::endl;
         return;
     }
-    
-    string name        = args[0];
-    string translation = args[1];
-    Dictionary::AddWord(name, translation);
+
+    if (args.size() == 2) {
+        Dictionary::AddWord(args[0], args[1]);
+    }
+    if (args.size() == 3) {
+        Dictionary::AddWord(args[0], args[1], args[2]);
+    }
+    if (args.size() > 3) {
+        vector<string> synonyms {vector<string>(args.begin() + 3, args.end())};
+        for (string synonym : synonyms) {
+            std::cout << synonym << std::endl;
+        }
+        Dictionary::AddWord(args[0], args[1], args[2], synonyms);
+    }
 }
 
 void Controller::erase (vector<string> args)

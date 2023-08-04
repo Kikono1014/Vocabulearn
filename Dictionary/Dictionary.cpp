@@ -32,7 +32,7 @@ void Dictionary::writeToJson (json dict)
     o << std::setw(4) << dict;
 }
 
-void Dictionary::AddWord (string name, string translation, vector<string> synonyms, string descriptions)
+void Dictionary::AddWord (string name, string translation, string descriptions, vector<string> synonyms)
 {
     json dict { readFromJson() }; 
     dict = dict[0];
