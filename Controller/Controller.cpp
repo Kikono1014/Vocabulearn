@@ -93,18 +93,23 @@ void Controller::help (vector<string> args)
 {
     if (args[0] == "") {
         std::cout << "help   - Write this text" << std::endl;
-        std::cout << "add    - Add word to dictionary (For more information: \"help add\")" << std::endl;
+        std::cout << "add    - Add word to dictionary" << std::endl;
         std::cout << "clear  - Clear your terminal" << std::endl;
         std::cout << "print  - Print whole dictionary" << std::endl;
-        std::cout << "test   - Testing your knowledge (For more information: \"help test\")" << std::endl;
+        std::cout << "test   - Testing your knowledge" << std::endl;
         std::cout << "empty  - Emptying your dictionary" << std::endl;
-        std::cout << "change - Changing some information in word (For more information: \"help change\")" << std::endl;
+        std::cout << "change - Changing some information in word" << std::endl;
+        std::cout << "/nFor more information: help <command name>" << std::endl;
     }
     
     if (args[0] == "add") {
         std::cout << "add <word> <translate> - to simply add word and translation" << std::endl;
     }
 
+    if (args[0] == "print") {
+        std::cout << "print <id>   - show detail information" << std::endl;
+        std::cout << "print <name> - show detail information" << std::endl;
+    }
 
     if (args[0] == "test") {
         std::cout << "test <type>              - to start test" << std::endl;
@@ -171,28 +176,32 @@ void Controller::test (vector<string> args)
 {
     int difficulty { Normal };
     
-    if (args.size() == 2) {
-        if (args[1] == "easy") {
-            difficulty = Easy;
+    if (args.size() == 1) {
+        if (args.size() == 2) {
+            if (args[1] == "easy") {
+                difficulty = Easy;
+            }
+            if (args[1] == "normal") {
+                difficulty = Normal;
+            }
+            if (args[1] == "hard") {
+                difficulty = Hard;
+            }
+            if (args[1] == "impossible") {
+                difficulty = Impossible;
+            } else {
+                difficulty = std::stoi(args[1])-1;
+            }
         }
-        if (args[1] == "normal") {
-            difficulty = Normal;
-        }
-        if (args[1] == "hard") {
-            difficulty = Hard;
-        }
-        if (args[1] == "impossible") {
-            difficulty = Impossible;
-        } else {
-            difficulty = std::stoi(args[1])-1;
-        }
-    }
 
-    if (args[0] == "wt") {
-        Testing::runTest(Dictionary::GetDictionary(), WordTranslation, difficulty);
-    }
-    if (args[0] == "tw") {
-        Testing::runTest(Dictionary::GetDictionary(), TranslationWord, difficulty); 
+        if (args[0] == "wt") {
+            Testing::runTest(Dictionary::GetDictionary(), WordTranslation, difficulty);
+        }
+        if (args[0] == "tw") {
+            Testing::runTest(Dictionary::GetDictionary(), TranslationWord, difficulty); 
+        }
+    } else {
+        std::cout << "Please, check spelling or write \"help test\"." << std::endl;
     }
 }
 
@@ -205,6 +214,7 @@ void Controller::empty (vector<string> args)
 void Controller::change (vector<string> args)
 {
     int wordId = std::stoi(args[0]) - 1;
+    
     if (args[1] == "synonym") {
         Dictionary::ChangeWord(wordId, args[1], std::stoi(args[2]), args[3]);
     }
