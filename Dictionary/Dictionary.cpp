@@ -73,6 +73,38 @@ void Dictionary::Print ()
     }
 }
 
+void Dictionary::Print (int id)
+{
+    json dict { readFromJson() };
+    if (id < dict[0].size()) {
+        json word { dict[0][id] };
+        word = word [0];
+        std::cout << "Word:        " << word["name"]        << std::endl;
+        std::cout << "Translation: " << word["translation"] << std::endl;
+        std::cout << "Description: " << word["description"] << std::endl;
+        std::cout << "Synonyms: " << std::endl;
+        for (auto& synonym : word["synonyms"]) {
+            std::cout << "             " << synonym << std::endl;
+        }
+        std::cout << "Score:       " << word["score"] << std::endl;
+    } else {
+        std::cout << "Not find" << std::endl;
+    }
+}
+
+void Dictionary::Print (string name)
+{
+    json dict { readFromJson() };
+    int id { 0 };
+    for (auto& word : dict[0]) {
+        if (word["name"] == name) {
+            Print(id);
+            return;
+        }
+        id++;
+    }
+    std::cout << "Not find" << std::endl;
+}
 
 json Dictionary::GetDictionary ()
 {
