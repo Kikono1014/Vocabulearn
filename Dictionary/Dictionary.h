@@ -24,7 +24,6 @@ public:
     static void EraseWord     (int pos);
     static void Print         ();
     static void Print         (int id);
-    static void Print         (string name);
     static json GetDictionary ();
     static void Empty         ();
     static void ChangeWord    (int id, string key, string value);

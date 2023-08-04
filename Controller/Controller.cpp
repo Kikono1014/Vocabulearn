@@ -88,6 +88,25 @@ vector<string> Controller::splitArguments(string strArgs)
     return args;
 }
 
+int Controller::getWordId (string name)
+{
+    try {
+        return std::stoi(name)-1;
+    }
+    catch (std::invalid_argument const& ex) {
+        json dict { Dictionary::GetDictionary() };
+        int id { 0 };
+        for (auto& word : dict[0]) {
+            if (word["name"] == name) {
+                return id;
+            }
+            id++;
+        }
+        std::cout << "Not found" << std::endl;
+        return -1;        
+    }
+
+}
 
 void Controller::help (vector<string> args)
 {
@@ -133,16 +152,16 @@ void Controller::help (vector<string> args)
     if (args[0] == "change") {
         std::cout << "change <word index> <key> <value> - to change value in word" << std::endl;
         std::cout << "Keys:"       << std::endl;
-        std::cout << "name"        << std::endl;
-        std::cout << "translation" << std::endl;
-        std::cout << "synonym"     << std::endl;
-        std::cout << "synonyms"    << std::endl;
-        std::cout << "description" << std::endl;
+        std::cout << "        name"        << std::endl;
+        std::cout << "    translation" << std::endl;
+        std::cout << "    synonym"     << std::endl;
+        std::cout << "    synonyms"    << std::endl;
+        std::cout << "    description" << std::endl;
 
         std::cout << "Specific keys command:" << std::endl;
-        std::cout << "change <word index> description \"<value>\" - to change description" << std::endl;
-        std::cout << "change <word index> synonym <index> <value> - to change concreted synonym" << std::endl;
-        std::cout << "change <word index> synonym <first synonym> <second synonym> ... <last synonym> - to change all synonyms" << std::endl;
+        std::cout << "    change <word index> description \"<value>\" - to change description" << std::endl;
+        std::cout << "    change <word index> synonym <index> <value> - to change concreted synonym" << std::endl;
+        std::cout << "    change <word index> synonym <first synonym> <second synonym> ... <last synonym> - to change all synonyms" << std::endl;
     }
 }
 
@@ -163,11 +182,10 @@ void Controller::print (vector<string> args)
     if (args[0] == "") {
         Dictionary::Print();   
     } else {
-        try {
-            Dictionary::Print(std::stoi(args[0])-1);
-        }
-        catch (std::invalid_argument const& ex) {
-            Dictionary::Print(args[0]);
+        int id { getWordId(args[0]) };
+        // -1: not found
+        if (id != -1) { 
+            Dictionary::Print(id);
         }
     }
 }

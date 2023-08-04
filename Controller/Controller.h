@@ -32,8 +32,9 @@ private:
     void empty  (vector<string> args);
     void change (vector<string> args);
 
-    void           runCommands   (string key, vector<string> args);
-    vector<string> splitArguments(string strArgs);
+    void           runCommands    (string key, vector<string> args);
+    vector<string> splitArguments (string strArgs);
+    int            getWordId      (string name);
     
 public:
     Controller ();

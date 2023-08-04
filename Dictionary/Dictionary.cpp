@@ -87,22 +87,8 @@ void Dictionary::Print (int id)
         }
         std::cout << "Score:       " << word["score"] << std::endl;
     } else {
-        std::cout << "Not find" << std::endl;
+        std::cout << "Not found" << std::endl;
     }
-}
-
-void Dictionary::Print (string name)
-{
-    json dict { readFromJson() };
-    int id { 0 };
-    for (auto& word : dict[0]) {
-        if (word["name"] == name) {
-            Print(id);
-            return;
-        }
-        id++;
-    }
-    std::cout << "Not find" << std::endl;
 }
 
 json Dictionary::GetDictionary ()
