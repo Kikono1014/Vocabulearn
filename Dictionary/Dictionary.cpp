@@ -67,7 +67,6 @@ void Dictionary::Print ()
         std::cout << p << ":" << std::endl;
         std::cout << "    " << word["name"]        << std::endl;
         std::cout << "    " << word["translation"] << std::endl;
-        std::cout << "    " << word["description"] << std::endl;
 
         p++;
     }
