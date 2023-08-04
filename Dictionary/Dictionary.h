@@ -27,7 +27,7 @@ public:
     static json GetDictionary ();
     static void Empty         ();
     static void ChangeWord    (int id, string key, string value);
-    static void ChangeWord    (int id, string key, int synonymId, string value);
+    static void ChangeWord    (int id, int synonymId, string value);
     static void ChangeWord    (int id, string key, vector<string> values);
     
     

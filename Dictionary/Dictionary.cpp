@@ -110,11 +110,11 @@ void Dictionary::ChangeWord (int id, string key, string value)
     writeToJson(dict);
 }
 
-void Dictionary::ChangeWord (int id, string key, int synonymId, string value)
+void Dictionary::ChangeWord (int id, int synonymId, string value)
 {
     json dict { readFromJson() };
     dict = dict[0];
-    dict[id][key][synonymId] = value;
+    dict[id]["synonyms"][synonymId] = value;
     writeToJson(dict);
 }
 
@@ -122,7 +122,8 @@ void Dictionary::ChangeWord (int id, string key, vector<string> values)
 {
     json dict { readFromJson() };
     dict = dict[0];
-    dict[id][key] = values;
+    // json synonyms { values };
+    dict[id]["synonyms"] = values;
     writeToJson(dict);
 }
 

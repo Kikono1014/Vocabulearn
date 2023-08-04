@@ -123,9 +123,9 @@ void Controller::help (vector<string> args)
     
     if (args[0] == "add") {
         std::cout << "add <word> <translate> - simply add word with translation" << std::endl;
-        std::cout << "add <word> <translate> <\"description\">"
+        std::cout << "add <word> <translate> \"<description>\""
             << " - add word with translation and description" << std::endl;
-        std::cout << "add <word> <translate> <\"description\"> <first synonym> <second synonym> ... <last synonym>"
+        std::cout << "add <word> <translate> \"<description>\" <first synonym> <second synonym> ... <last synonym>"
             << "\n - add word with translation, description and synonyms" << std::endl;
     }
 
@@ -161,7 +161,7 @@ void Controller::help (vector<string> args)
         std::cout << "Specific keys command:" << std::endl;
         std::cout << "    change <word index> description \"<value>\" - to change description" << std::endl;
         std::cout << "    change <word index> synonym <index> <value> - to change concreted synonym" << std::endl;
-        std::cout << "    change <word index> synonym <first synonym> <second synonym> ... <last synonym> - to change all synonyms" << std::endl;
+        std::cout << "    change <word index> synonyms <first synonym> <second synonym> ... <last synonym> - to change all synonyms" << std::endl;
     }
 }
 
@@ -205,9 +205,6 @@ void Controller::add (vector<string> args)
     }
     if (args.size() > 3) {
         vector<string> synonyms {vector<string>(args.begin() + 3, args.end())};
-        for (string synonym : synonyms) {
-            std::cout << synonym << std::endl;
-        }
         Dictionary::AddWord(args[0], args[1], args[2], synonyms);
     }
 }
@@ -260,25 +257,32 @@ void Controller::empty (vector<string> args)
 
 void Controller::change (vector<string> args)
 {
-    int wordId = std::stoi(args[0]) - 1;
-    
-    if (args[0] == "") {
-        std::cout << "Please, check spelling or write \"help change\"." << std::endl;
-        return;
-    }
-
-    if (args[1] == "synonym") {
-        Dictionary::ChangeWord(wordId, args[1], std::stoi(args[2]), args[3]);
-    }
-    if (args[1] == "synonyms") {
-        vector<string> synonyms {};
-        for (string synonym : args) {
-            synonyms.push_back(synonym);
+    int wordId { getWordId(args[0]) };
+    // -1: not found
+    if (wordId != -1) {    
+        if (args[0] == "") {
+            std::cout << "Please, check spelling or write \"help change\"." << std::endl;
+            return;
         }
-        Dictionary::ChangeWord(wordId, args[1], synonyms);
-    }
-    if (args[1] != "synonym" or args[1] != "synonyms") {
-        Dictionary::ChangeWord(wordId, args[1], args[2]);
+            
+        if ( args[1] == "name" or args[1] == "translation"
+          or args[1] == "description"
+          or args[1] == "synonym" or args[1] == "synonyms"
+           ) 
+        {
+            if (args[1] == "synonym") {
+                Dictionary::ChangeWord(wordId, std::stoi(args[2])-1, args[3]);
+            }
+            if (args[1] == "synonyms") {
+                vector<string> synonyms {vector<string>(args.begin() + 2, args.end())};
+                Dictionary::ChangeWord(wordId, args[1], synonyms);
+            }
+            if (args[1] != "synonym" and args[1] != "synonyms") {
+                Dictionary::ChangeWord(wordId, args[1], args[2]);
+            }
+        } else {
+            std::cout << "Wrong key" << std::endl;
+        }
     }
 }
 
