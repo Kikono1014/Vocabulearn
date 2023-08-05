@@ -241,7 +241,6 @@ void Controller::test (vector<string> args)
         if (args[1] == "impossible") {
             difficulty = Impossible;
         } else {
-            // TODO add this to help
             difficulty = std::stoi(args[1])-1;
         }
     }
