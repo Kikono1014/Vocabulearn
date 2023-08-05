@@ -16,7 +16,6 @@ Controller::Controller ()
 
 void Controller::processCommand ()
 {
-    // get input from user
     string command { Key::GetAsyncString() };
     
     if (command != "") {
@@ -34,7 +33,6 @@ void Controller::processCommand ()
     }
 }
 
-// give a list of commands name
 vector<string> Controller::getCommandsList ()
 {
     vector<string> commandsList {};
@@ -48,7 +46,7 @@ vector<string> Controller::getCommandsList ()
 void Controller::runCommands (string key, vector<string> args) 
 {
     if (commands.find(key) != commands.end()) {
-        (this->*commands[key])(args);
+        (this->*commands[key])(args); // run command
     } else {
         std::cout << "Command " << key << " not found. Please, check spelling or write \"help\"." << std::endl;
     }
@@ -67,18 +65,19 @@ vector<string> Controller::splitArguments(string strArgs)
             inQuotes = !inQuotes;
         }
 
+        // in quotes we get all words like one arguments
         if (inQuotes) {
             if (ch != '"') {
                 line += ch;
             } 
         } else {
+            // add argument to args list when word or sentence in quotes ends
             if (ch == ' ' or ch == '"' or ch == strArgs[strArgs.length()]) {
                 if (line != "") {
                     args.push_back(line);
                     line = "";
                 }
             }
-        
             if (ch != ' ' and ch != '"') {
                 line += ch;
             }
@@ -90,9 +89,13 @@ vector<string> Controller::splitArguments(string strArgs)
 
 int Controller::getWordId (string name)
 {
+    // user can find by word id or by name
+
+    // if he write a number it just converted to integer
     try {
         return std::stoi(name)-1;
     }
+    // but if it not a number, we catch convert error and find words id by name
     catch (std::invalid_argument const& ex) {
         json dict { Dictionary::GetDictionary() };
         int id { 0 };
@@ -103,7 +106,7 @@ int Controller::getWordId (string name)
             id++;
         }
         std::cout << "Not found" << std::endl;
-        return -1;        
+        return -1; // if noting found return -1 code
     }
 
 }
@@ -211,6 +214,7 @@ void Controller::add (vector<string> args)
 
 void Controller::erase (vector<string> args)
 {
+    // TODO change to getWordId func
     Dictionary::EraseWord(std::stoi(args[0])-1);
 }
 
@@ -237,6 +241,7 @@ void Controller::test (vector<string> args)
         if (args[1] == "impossible") {
             difficulty = Impossible;
         } else {
+            // TODO add this to help
             difficulty = std::stoi(args[1])-1;
         }
     }
@@ -254,13 +259,12 @@ void Controller::empty (vector<string> args)
     Dictionary::Empty();
 }
 
-
 void Controller::change (vector<string> args)
 {
     int wordId { getWordId(args[0]) };
     // -1: not found
     if (wordId != -1) {    
-        if (args[0] == "") {
+        if (args[0] == "" or args[1] == "" or args[2] == "") {
             std::cout << "Please, check spelling or write \"help change\"." << std::endl;
             return;
         }
