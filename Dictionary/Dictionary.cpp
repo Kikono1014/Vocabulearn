@@ -102,6 +102,14 @@ void Dictionary::Empty ()
 }
 
 
+void Dictionary::ChangeWord (int id, string key, int value)
+{
+    json dict { readFromJson() };
+    dict = dict[0];
+    dict[id][key] = value;
+    writeToJson(dict);
+}
+
 void Dictionary::ChangeWord (int id, string key, string value)
 {
     json dict { readFromJson() };

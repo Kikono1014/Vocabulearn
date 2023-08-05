@@ -76,19 +76,19 @@ void Testing::doTest (json dict, vector<int> test, int type)
     if (type == WordTranslation) {
         for (int i : test) {
             std::cout << dict[i]["name"] << std::endl;
-            proccessAnswer(dict[i], getAnswer(), type);
+            proccessAnswer(dict[i], i, getAnswer(), type);
         }
     }
     if (type == TranslationWord) {
         for (int i : test) {
             std::cout << dict[i]["translation"] << std::endl;
-            proccessAnswer(dict[i], getAnswer(), type);
+            proccessAnswer(dict[i], i, getAnswer(), type);
         }
     }
     std::cout << "Test ended." << std::endl;
 }
 
-void Testing::proccessAnswer (json word, string answer, int type)
+void Testing::proccessAnswer (json word, int id, string answer, int type)
 {
     bool result { false };
     string correct { "" };
@@ -103,6 +103,9 @@ void Testing::proccessAnswer (json word, string answer, int type)
     }
 
     if (result) {
+        int score { word["score"] };
+        score += score * 1.25 + 1;
+        Dictionary::ChangeWord(id, "score", score);
         std::cout << "Correct" << std::endl;
     } else {
         std::cout << "Incorrect. Correct word is " << correct << std::endl;

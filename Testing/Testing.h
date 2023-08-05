@@ -35,7 +35,7 @@ class Testing
 private:
     static vector<int> createTest     (json dict, int difficult);
     static void        doTest         (json dict, vector<int> test, int type);
-    static void        proccessAnswer (json word, string answer, int type);
+    static void        proccessAnswer (json word, int id, string answer, int type);
 
 public:
     Testing();
