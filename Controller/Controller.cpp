@@ -128,7 +128,7 @@ void Controller::help (vector<string> args)
         std::cout << "test   - Testing your knowledge" << std::endl;
         std::cout << "empty  - Emptying your dictionary" << std::endl;
         std::cout << "change - Changing some information in word" << std::endl;
-        std::cout << "/nFor more information: help <command name>" << std::endl;
+        std::cout << "\nFor more information: help <command name>" << std::endl;
     }
     
     if (args[0] == "add") {
