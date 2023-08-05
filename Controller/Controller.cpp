@@ -89,15 +89,22 @@ vector<string> Controller::splitArguments(string strArgs)
 
 int Controller::getWordId (string name)
 {
+    json dict { Dictionary::GetDictionary() };
     // user can find by word id or by name
 
     // if he write a number it just converted to integer
     try {
-        return std::stoi(name)-1;
+        int id { std::stoi(name)-1 };
+        if (id < dict.size()) {
+            return id;
+        } else {
+            std::cout << "Id out of range" << std::endl;
+            return -1;
+        }
+        
     }
     // but if it not a number, we catch convert error and find words id by name
     catch (std::invalid_argument const& ex) {
-        json dict { Dictionary::GetDictionary() };
         int id { 0 };
         for (auto& word : dict[0]) {
             if (word["name"] == name) {
@@ -214,8 +221,10 @@ void Controller::add (vector<string> args)
 
 void Controller::erase (vector<string> args)
 {
-    // TODO change to getWordId func
-    Dictionary::EraseWord(std::stoi(args[0])-1);
+    int id { getWordId(args[0]) };
+    if (id != -1) {
+        Dictionary::EraseWord(id);
+    }
 }
 
 void Controller::test (vector<string> args)
