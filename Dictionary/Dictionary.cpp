@@ -122,7 +122,6 @@ void Dictionary::ChangeWord (int id, string key, vector<string> values)
 {
     json dict { readFromJson() };
     dict = dict[0];
-    // json synonyms { values };
     dict[id]["synonyms"] = values;
     writeToJson(dict);
 }
